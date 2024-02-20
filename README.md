@@ -57,7 +57,7 @@ The following steps apply to:
 
 ### Retrieving data
 
-After preliminary analysis of the source files in Python, the data was retrieved via API to the appropriate folder and imported into Power BI using Power Query.
+After preliminary analysis of the source files in Python, the data was [retrieved via API](Code/Data_retrieval.ipynb) to the appropriate folder and imported into Power BI using Power Query.
 
 ### Power Query
 In Power Query, data was imported from various sources, cleaned of unnecessary columns (the fact table was reduced from 48 columns to 16), and standardized. Some tables were joined. Additionally, a date table was created in the form of a calendar.
