@@ -1,0 +1,174 @@
+Fact Table
+
+----
+
+let
+    Source = Folder.Files("-----------top_secret_folder-----------"),
+    #"Filtered Hidden Files1" = Table.SelectRows(Source, each [Attributes]?[Hidden]? <> true),
+    #"Invoke Custom Function1" = Table.AddColumn(#"Filtered Hidden Files1", "Transform File (3)", each #"Transform File (3)"([Content])),
+    #"Renamed Columns1" = Table.RenameColumns(#"Invoke Custom Function1", {"Name", "Source.Name"}),
+    #"Removed Other Columns1" = Table.SelectColumns(#"Renamed Columns1", {"Source.Name", "Transform File (3)"}),
+    #"Expanded Table Column1" = Table.ExpandTableColumn(#"Removed Other Columns1", "Transform File (3)", Table.ColumnNames(#"Transform File (3)"(#"Sample File (3)"))),
+    #"Removed Columns" = Table.RemoveColumns(#"Expanded Table Column1",{"Source.Name", "typeCode", "freqCode", "period", "refYear", "refMonth", "reporterISO", "reporterDesc", "flowDesc", "partnerISO", "partnerDesc", "partner2ISO", "partner2Desc", "classificationSearchCode", "isOriginalClassification", "cmdCode", "cmdDesc", "aggrLevel", "isLeaf", "customsCode", "customsDesc", "mosCode", "motDesc", "qtyUnitAbbr", "isQtyEstimated", "altQtyUnitAbbr", "isAltQtyEstimated", "isNetWgtEstimated", "isGrossWgtEstimated", "isReported", "isAggregate", "classificationCode", "legacyEstimationFlag"}),
+    #"Replaced Value" = Table.ReplaceValue(#"Removed Columns",".",",",Replacer.ReplaceText,{"qty", "altQty", "netWgt", "grossWgt", "cifvalue", "fobvalue", "primaryValue"}),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Replaced Value",{{"primaryValue", type number}, {"fobvalue", type number}, {"cifvalue", type number}, {"grossWgt", type number}, {"netWgt", type number}, {"altQty", type number}, {"qty", type number}, {"refPeriodId", Date.Type}, {"reporterCode", Int64.Type}, {"partnerCode", Int64.Type}, {"partner2Code", Int64.Type}, {"motCode", Int64.Type}, {"qtyUnitCode", Int64.Type}, {"altQtyUnitCode", Int64.Type}, {"flowCode", type text}}),
+    #"Filtered Rows" = Table.SelectRows(#"Changed Type1", each [partnerCode] <> 0),
+    #"Inserted Year" = Table.AddColumn(#"Filtered Rows", "Year", each Date.Year([refPeriodId]), Int64.Type)
+in
+    #"Inserted Year"
+
+----
+
+Country grouping
+
+----
+
+let
+    Source = Csv.Document(File.Contents("-----------top_secret_folder-----------"),[Delimiter=";", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}}),
+    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true])
+in
+    #"Promoted Headers"
+
+----
+
+Countries
+
+----
+
+let
+    Source = Csv.Document(File.Contents("-----------top_secret_folder-----------"),[Delimiter=";", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Country Code", type text}, {"Country", type text}, {"Region", type text}})
+in
+    #"Changed Type"
+
+----
+
+dimCountries_second
+
+----
+
+let
+    Source = Json.Document(File.Contents("-----------top_secret_folder-----------")),
+    #"Converted to Table" = Table.FromRecords({Source}),
+    #"Expanded results" = Table.ExpandListColumn(#"Converted to Table", "results"),
+    #"Expanded results1" = Table.ExpandRecordColumn(#"Expanded results", "results", {"id", "text", "PartnerCode", "PartnerDesc", "partnerNote", "PartnerCodeIsoAlpha2", "PartnerCodeIsoAlpha3", "entryEffectiveDate", "entryExpiredDate", "isGroup"}, {"results.id", "results.text", "results.PartnerCode", "results.PartnerDesc", "results.partnerNote", "results.PartnerCodeIsoAlpha2", "results.PartnerCodeIsoAlpha3", "results.entryEffectiveDate", "results.entryExpiredDate", "results.isGroup"}),
+    #"Changed Type" = Table.TransformColumnTypes(#"Expanded results1",{{"results.id", Int64.Type}, {"results.text", type text}, {"results.PartnerCode", Int64.Type}, {"results.PartnerDesc", type text}, {"results.partnerNote", type text}, {"results.PartnerCodeIsoAlpha2", type text}, {"results.PartnerCodeIsoAlpha3", type text}, {"results.entryEffectiveDate", type datetime}, {"results.entryExpiredDate", type any}, {"results.isGroup", type logical}}),
+    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"results.entryEffectiveDate", "results.entryExpiredDate", "results.isGroup", "results.PartnerCode", "results.PartnerDesc", "results.partnerNote", "results.PartnerCodeIsoAlpha2"}),
+    #"Merged Queries" = Table.NestedJoin(#"Removed Columns", {"results.PartnerCodeIsoAlpha3"}, #"Country grouping", {"Country Code"}, "Country grouping", JoinKind.LeftOuter),
+    #"Expanded Country grouping" = Table.ExpandTableColumn(#"Merged Queries", "Country grouping", {"Country Code", "Region", "Continent", "World"}, {"Country grouping.Country Code", "Country grouping.Region", "Country grouping.Continent", "Country grouping.World"}),
+    #"Renamed Columns" = Table.RenameColumns(#"Expanded Country grouping",{{"results.text", "CountryName"}, {"Country grouping.Continent", "Continent"}, {"Country grouping.World", "World"}, {"Country grouping.Region", "Region"}, {"Country grouping.Country Code", "CountryCode"}, {"results.PartnerCodeIsoAlpha3", "CountryCodeISO"}, {"results.id", "CountryID"}})
+in
+    #"Renamed Columns"
+
+----
+
+dimCustoms
+
+----
+
+let
+    Source = Excel.Workbook(File.Contents("-----------top_secret_folder-----------"), null, true),
+    #"REF CUSTOMS_Sheet" = Source{[Item="REF CUSTOMS",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(#"REF CUSTOMS_Sheet", [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"cstCode", type any}, {"cstDescription", type text}})
+in
+    #"Changed Type"
+
+----
+
+dimFlows
+
+----
+
+let
+    Source = Excel.Workbook(File.Contents("-----------top_secret_folder-----------"), null, true),
+    #"REF FLOWS_Sheet" = Source{[Item="REF FLOWS",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(#"REF FLOWS_Sheet", [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"flwCode", type any}, {"flwDescription", type text}, {"flwCategory", type text}})
+in
+    #"Changed Type"
+
+----
+
+dimMot
+
+----
+
+let
+    Source = Excel.Workbook(File.Contents("-----------top_secret_folder-----------"), null, true),
+    #"REF MOT_Sheet" = Source{[Item="REF MOT",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(#"REF MOT_Sheet", [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"motCode", Int64.Type}, {"motName", type text}})
+in
+    #"Changed Type"
+
+----
+
+dimQty
+
+----
+
+let
+    Source = Excel.Workbook(File.Contents("-----------top_secret_folder-----------"), null, true),
+    #"REF QTY_Sheet" = Source{[Item="REF QTY",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(#"REF QTY_Sheet", [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"qtyCode", Int64.Type}, {"qtyAbbr", type text}, {"qtyDescription", type text}})
+in
+    #"Changed Type"
+
+----
+
+dimCountries
+
+----
+
+let
+    Source = Json.Document(File.Contents("-----------top_secret_folder-----------")),
+    #"Converted to Table" = Table.FromRecords({Source}),
+    #"Expanded results" = Table.ExpandListColumn(#"Converted to Table", "results"),
+    #"Expanded results1" = Table.ExpandRecordColumn(#"Expanded results", "results", {"id", "text", "PartnerCode", "PartnerDesc", "partnerNote", "PartnerCodeIsoAlpha2", "PartnerCodeIsoAlpha3", "entryEffectiveDate", "entryExpiredDate", "isGroup"}, {"results.id", "results.text", "results.PartnerCode", "results.PartnerDesc", "results.partnerNote", "results.PartnerCodeIsoAlpha2", "results.PartnerCodeIsoAlpha3", "results.entryEffectiveDate", "results.entryExpiredDate", "results.isGroup"}),
+    #"Changed Type" = Table.TransformColumnTypes(#"Expanded results1",{{"results.id", Int64.Type}, {"results.text", type text}, {"results.PartnerCode", Int64.Type}, {"results.PartnerDesc", type text}, {"results.partnerNote", type text}, {"results.PartnerCodeIsoAlpha2", type text}, {"results.PartnerCodeIsoAlpha3", type text}, {"results.entryEffectiveDate", type datetime}, {"results.entryExpiredDate", type any}, {"results.isGroup", type logical}}),
+    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"results.entryEffectiveDate", "results.entryExpiredDate", "results.isGroup", "results.PartnerCode", "results.PartnerDesc", "results.partnerNote", "results.PartnerCodeIsoAlpha2"}),
+    #"Merged Queries" = Table.NestedJoin(#"Removed Columns", {"results.PartnerCodeIsoAlpha3"}, #"Country grouping", {"Country Code"}, "Country grouping", JoinKind.LeftOuter),
+    #"Expanded Country grouping" = Table.ExpandTableColumn(#"Merged Queries", "Country grouping", {"Country Code", "Region", "Continent"}, {"Country grouping.Country Code", "Country grouping.Region", "Country grouping.Continent"}),
+    #"Merged Queries1" = Table.NestedJoin(#"Expanded Country grouping", {"results.id"}, FactTable, {"reporterCode"}, "FactTable", JoinKind.Inner),
+    #"Expanded FactTable" = Table.ExpandTableColumn(#"Merged Queries1", "FactTable", {"reporterCode"}, {"FactTable.reporterCode"}),
+    #"Removed Duplicates" = Table.Distinct(#"Expanded FactTable"),
+    #"Renamed Columns" = Table.RenameColumns(#"Removed Duplicates",{{"results.id", "CountryID"}, {"results.text", "CountryName"}, {"results.PartnerCodeIsoAlpha3", "CountryCodeISO"}, {"Country grouping.Country Code", "CountryCode"}, {"Country grouping.Region", "Region"}, {"Country grouping.Continent", "Continent"},  {"FactTable.reporterCode", "Check"}})
+in
+    #"Renamed Columns"
+
+----
+
+Calendar
+
+----
+
+let
+    StartYear = 2000,
+    EndYear = 2023,
+    ListOfYears = {StartYear..EndYear},
+    Source = List.Transform(ListOfYears, each 
+        let
+            Year = _,
+            Months = List.Transform({1..12}, each 
+                let
+                    Month = _
+                in
+                    #date(Year, Month, 1)
+            )
+        in
+            Months
+    ),
+    TableFromList = Table.FromList(Source, Splitter.SplitByNothing(), {"Date"}),
+    #"Expanded Date" = Table.ExpandListColumn(TableFromList, "Date"),
+    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Date",{{"Date", type date}}),
+    #"Inserted Year" = Table.AddColumn(#"Changed Type", "Year", each Date.Year([Date]), Int64.Type),
+    #"Inserted Month" = Table.AddColumn(#"Inserted Year", "Month", each Date.Month([Date]), Int64.Type),
+    #"Inserted Month Name" = Table.AddColumn(#"Inserted Month", "Month Name", each Date.MonthName([Date]), type text)
+in
+    #"Inserted Month Name"
+
+----

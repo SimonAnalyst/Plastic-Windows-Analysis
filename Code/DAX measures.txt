@@ -1,0 +1,351 @@
+DEFINE
+    MEASURE '_DAX'[% total export sales] = CALCULATE (
+    DIVIDE (
+        [Total export sales],
+        CALCULATE ( [Total export sales], ALLSELECTED ( FactTable ) )
+    )
+)
+    MEASURE '_DAX'[% total export volume] = CALCULATE (
+    DIVIDE (
+        [Total export volume],
+        CALCULATE ( [Total export volume], ALLSELECTED ( FactTable ) )
+    )
+)
+    MEASURE '_DAX'[% total import sales] = CALCULATE (
+    DIVIDE (
+        [Total import sales],
+        CALCULATE ( [Total import sales], ALLSELECTED ( FactTable ) )
+    )
+)
+    MEASURE '_DAX'[% total import volume] = CALCULATE (
+    DIVIDE (
+        [Total import volume],
+        CALCULATE ( [Total import volume], ALLSELECTED ( FactTable ) )
+    )
+)
+    MEASURE '_DAX'[Number of export partners] = CALCULATE (
+    DISTINCTCOUNT ( FactTable[partnerCode] ),
+    dimFlows[flwCode] = "X",
+    dimMot[motCode] = 0,
+    FactTable[partner2Code] = 0
+)
+    MEASURE '_DAX'[Number of exporters] = CALCULATE (
+    DISTINCTCOUNT ( FactTable[reporterCode] ),
+    dimFlows[flwCode] = "X",
+    dimMot[motCode] = 0,
+    FactTable[partner2Code] = 0
+)
+    MEASURE '_DAX'[Number of import partners] = CALCULATE (
+    DISTINCTCOUNT ( FactTable[partnerCode] ),
+    dimFlows[flwCode] = "M",
+    dimMot[motCode] = 0,
+    FactTable[partner2Code] = 0
+)
+    MEASURE '_DAX'[Number of importers] = CALCULATE (
+    DISTINCTCOUNT ( FactTable[reporterCode] ),
+    dimFlows[flwCode] = "M",
+    dimMot[motCode] = 0,
+    FactTable[partner2Code] = 0
+)
+    MEASURE '_DAX'[Total CIF export sales] = CALCULATE (
+    SUM ( FactTable[cifvalue] ),
+    dimFlows[flwCode] = "X",
+    dimMot[motCode] = 0,
+    FactTable[partner2Code] = 0
+)
+    MEASURE '_DAX'[Total CIF import sales] = CALCULATE (
+    SUM ( FactTable[cifvalue] ),
+    dimFlows[flwCode] = "M",
+    dimMot[motCode] = 0,
+    FactTable[partner2Code] = 0
+)
+    MEASURE '_DAX'[Total export sales] = CALCULATE (
+    SUM ( FactTable[primaryValue] ),
+    dimFlows[flwCode] = "X",
+    dimMot[motCode] = 0,
+    FactTable[partner2Code] = 0
+)
+    MEASURE '_DAX'[Total export sales by MOT] = CALCULATE (
+    SUM ( FactTable[primaryValue] ),
+    dimFlows[flwCode] = "X",
+    dimMot[motCode] <> 0,
+    FactTable[partner2Code] = 0
+)
+    MEASURE '_DAX'[Total export volume] = CALCULATE (
+    SUM ( FactTable[netWgt] ),
+    dimFlows[flwCode] = "X",
+    dimMot[motCode] = 0,
+    FactTable[partner2Code] = 0,
+    NOT dimCountries[CountryCode] IN { "LUX", "HRV" }
+)
+    MEASURE '_DAX'[Total FOB export sales] = CALCULATE (
+    SUM ( FactTable[fobvalue] ),
+    dimFlows[flwCode] = "X",
+    dimMot[motCode] = 0,
+    FactTable[partner2Code] = 0
+)
+    MEASURE '_DAX'[Total FOB import sales] = CALCULATE (
+    SUM ( FactTable[fobvalue] ),
+    dimFlows[flwCode] = "M",
+    dimMot[motCode] = 0,
+    FactTable[partner2Code] = 0
+)
+    MEASURE '_DAX'[Total import sales] = CALCULATE (
+    SUM ( FactTable[primaryValue] ),
+    dimFlows[flwCode] = "M",
+    dimMot[motCode] = 0,
+    FactTable[partner2Code] = 0
+)
+    MEASURE '_DAX'[Total import sales by MOT] = CALCULATE (
+    SUM ( FactTable[primaryValue] ),
+    dimFlows[flwCode] = "M",
+    dimMot[motCode] <> 0,
+    FactTable[partner2Code] = 0
+)
+    MEASURE '_DAX'[Total import volume] = CALCULATE (
+    SUM ( FactTable[netWgt] ),
+    dimFlows[flwCode] = "M",
+    dimMot[motCode] = 0,
+    FactTable[partner2Code] = 0,
+    NOT dimCountries[CountryCode] IN { "LUX", "HRV" }
+)
+    MEASURE '_DAX'[__Total export sales] = CALCULATE (
+    DIVIDE (
+        [Total export sales],
+        CALCULATE ( [Total export sales], ALL ( FactTable ) )
+    )
+)
+    MEASURE '_DAX'[Total import and export] = CALCULATE (
+    SUM ( FactTable[primaryValue] ),
+    dimMot[motCode] = 0,
+    FactTable[partner2Code] = 0
+)
+    MEASURE '_DAX'[Country scatter colour slicer] = IF (
+    SELECTEDVALUE ( dimCountries[CountryName] )
+        = SELECTEDVALUE ( dimCountries2[Country] ),
+    SWITCH (
+        TRUE (),
+        SELECTEDVALUE ( dimCountries[CountryName] )
+            = SELECTEDVALUE ( dimCountries2[Country] ), "#000000",
+        "#DFE3EE"
+    ),
+    SWITCH (
+        TRUE (),
+        SELECTEDVALUE ( dimCountries[Continent] )
+            = SELECTEDVALUE ( dimCountries2[Continent] ), "#49476E",
+        "#DFE3EE"
+    )
+)
+    MEASURE '_DAX'[Total export sales 2] = CALCULATE (
+    SUM ( FactTable[primaryValue] ),
+    dimFlows[flwCode] = "X",
+    dimMot[motCode] = 0,
+    FactTable[partner2Code] = 0
+)
+    MEASURE '_DAX'[Total import sales 2] = CALCULATE (
+    SUM ( FactTable[primaryValue] ),
+    dimFlows[flwCode] = "M",
+    dimMot[motCode] = 0,
+    FactTable[partner2Code] = 0
+)
+    MEASURE '_DAX'[Total export Colour Coding for Chart] = SWITCH (
+    TRUE (),
+    SELECTEDVALUE ( Years[Years] ) = SELECTEDVALUE ( 'Calendar'[Year] ), "#3970F5",
+    "#a1bdfb"
+)
+    MEASURE '_DAX'[Total import export Sales YoY] = VAR CurrentYearSales = [Total import and export]
+VAR PreviousYearSales =
+    CALCULATE ( [Total import and export], SAMEPERIODLASTYEAR ( 'Calendar'[Date] ) )
+RETURN
+    IF (
+        ISBLANK ( PreviousYearSales ),
+        BLANK (),
+        ( CurrentYearSales / PreviousYearSales ) - 1
+    )
+    MEASURE '_DAX'[Total Export Sales MoM] = VAR CurrentMonthSales = [Total Export Sales]
+VAR PreviousMonthSales =
+    CALCULATE (
+        [Total Export Sales],
+        DATESMTD ( PREVIOUSMONTH ( 'Calendar'[Date] ) )
+    )
+RETURN
+    IF (
+        ISBLANK ( PreviousMonthSales ),
+        BLANK (),
+        ( CurrentMonthSales / PreviousMonthSales ) - 1
+    )
+    MEASURE '_DAX'[Total Export Sales YoY 2] = VAR CurrentYearSales = [Total Export Sales]
+VAR PreviousYearSales =
+    CALCULATE (
+        [Total Export Sales],
+        FILTER ( 'Calendar', 'Calendar'[Year] > 2010 ),
+        SAMEPERIODLASTYEAR ( 'Calendar'[Date] )
+    )
+RETURN
+    IF (
+        ISBLANK ( PreviousYearSales ),
+        BLANK (),
+        ( CurrentYearSales / PreviousYearSales ) - 1
+    )
+--do karty
+    MEASURE '_DAX'[Total Export Sales YoY v2maxmin] = VAR CurrentYearSales =
+    CALCULATE (
+        [Total Export Sales],
+        DATESINPERIOD ( 'Calendar'[Date], LASTDATE ( 'Calendar'[Date] ), -1, YEAR )
+    )
+VAR PreviousYearSales =
+    CALCULATE ( [Total Export Sales], SAMEPERIODLASTYEAR ( 'Calendar'[Date] ) )
+RETURN
+    IF (
+        ISBLANK ( CurrentYearSales ),
+        BLANK (),
+        ( PreviousYearSales / CurrentYearSales ) - 1
+    )
+    MEASURE '_DAX'[% YoY change] = CALCULATE ( [Total export sales], DATEADD ( 'Calendar'[Date], -1, YEAR ) )
+    MEASURE '_DAX'[% YoY minmax change] = VAR _currentyear =
+    CALCULATE ( [Total export sales], 'Calendar'[Year] = 2023 )
+VAR _minyear =
+    CALCULATE (
+        [Total export sales],
+        FILTER ( ALL ( 'Calendar'[Year] ), 'Calendar'[Year] = MIN ( 'Calendar'[Year] ) )
+    )
+RETURN
+    DIVIDE ( _currentyear, _minyear ) - 1
+    MEASURE '_DAX'[% YoY minmax change v3] = VAR _minyear =
+    MINX (
+        FILTER ( 'Calendar', NOT ( ISBLANK ( [Total import and export] ) ) ),
+        'Calendar'[Year]
+    )
+VAR _maxyear =
+    MAXX (
+        FILTER ( 'Calendar', NOT ( ISBLANK ( [Total import and export] ) ) ),
+        'Calendar'[Year]
+    )
+VAR _exportmin =
+    CALCULATE ( [Total import and export], 'Calendar'[Year] = _minyear )
+VAR _exportmax =
+    CALCULATE ( [Total import and export], 'Calendar'[Year] = _maxyear )
+RETURN
+    DIVIDE ( _exportmax, _exportmin ) - 1
+    MEASURE '_DAX'[Total export sales by partner] = CALCULATE (
+    SUM ( FactTable[primaryValue] ),
+    dimFlows[flwCode] = "X",
+    dimMot[motCode] = 0,
+    FactTable[partner2Code] = 0,
+    USERELATIONSHIP ( dimCountries[CountryID], FactTable[partnerCode] )
+)
+    MEASURE '_DAX'[% total export import sales] = CALCULATE (
+    DIVIDE (
+        [Total import and export],
+        CALCULATE ( [Total import and export], ALLSELECTED ( FactTable ) )
+    )
+)
+    MEASURE '_DAX'[Total export import sales by MOT 2] = CALCULATE (
+    SUM ( FactTable[primaryValue] ),
+    dimMot[motCode] <> 0,
+    FactTable[partner2Code] = 0
+)
+    MEASURE '_DAX'[% colour change] = SWITCH (
+    TRUE (),
+    [Total import export Sales YoY] > 0, "#00CCCC",
+    [Total import export Sales YoY] < 0, "#FFCCCC"
+)
+    MEASURE '_DAX'[YTD % change] = DATESYTD ( 'Calendar'[Date], "2023-12-31" )
+    MEASURE '_DAX'[Title type of transport] = SWITCH (
+    ISFILTERED ( dimFlows[flwDescription] ),
+    SELECTEDVALUE ( dimFlows[flwDescription] ) = "Export", "Total export by type of transport",
+    "Total import by type of transport"
+)
+    MEASURE '_DAX'[Total export Sales YoY %] = VAR CurrentYearSales = [Total export sales]
+VAR PreviousYearSales =
+    CALCULATE ( [Total export sales], SAMEPERIODLASTYEAR ( 'Calendar'[Date] ) )
+RETURN
+    IF (
+        ISBLANK ( PreviousYearSales ),
+        BLANK (),
+        ( CurrentYearSales / PreviousYearSales ) - 1
+    )
+    MEASURE '_DAX'[Tittle page3] = IF ( SELECTEDVALUE ( dimFlows[flwDescription] ) = "Export", "export", "import" )
+    MEASURE '_DAX'[Tittle page3 increased] = SWITCH (
+    TRUE (),
+    [% YoY minmax change v3] > 0, "increased",
+    [% YoY minmax change v3] < 0, "decreased",
+    "remained unchanged"
+)
+    MEASURE '_DAX'[Tittle page3 YoY] = IF (
+    SELECTEDVALUE ( dimFlows[flwDescription] ) = "Export",
+    "Export YoY %",
+    "Import YoY %"
+)
+    MEASURE '_DAX'[Years_color] = VAR _max =
+    MAXX ( ALLSELECTED ( Years_to_bar ), Years_to_bar[Value] )
+VAR _min =
+    MINX ( ALLSELECTED ( Years_to_bar ), Years_to_bar[Value] )
+RETURN
+    IF (
+        MAX ( 'Calendar'[Year] ) >= _min
+            && MAX ( 'Calendar'[Year] ) <= _max,
+        "#1D1C3B",
+        "#AAABB6"
+    )
+    MEASURE '_DAX'[Page 1 tittle] = IF (
+    SELECTEDVALUE ( dimFlows[flwDescription] ) = "Export",
+    "exporters",
+    "importers"
+)
+    MEASURE '_DAX'[Page 1 tittle2] = SWITCH (
+    TRUE (),
+    SELECTEDVALUE ( dimFlows[flwDescription] ) = "Export", "Export",
+    SELECTEDVALUE ( dimFlows[flwDescription] ) = "Import", "Import",
+    "export and import"
+)
+    MEASURE '_DAX'[% total export import sales by mot] = VAR one =
+    CALCULATE (
+        DIVIDE (
+            [Total export import sales by MOT 2],
+            CALCULATE ( [Total export import sales by MOT 2], ALLSELECTED ( FactTable ) )
+        )
+    )
+RETURN
+    "and " & FORMAT ( one, "0.00%" ) & " of Total"
+    MEASURE '_DAX'[Number of export/import partners] = CALCULATE (
+    DISTINCTCOUNT ( FactTable[partnerCode] ),
+    dimMot[motCode] = 0,
+    FactTable[partner2Code] = 0
+)
+    MEASURE '_DAX'[Tooltip tittle2] = SWITCH (
+    TRUE (),
+    SELECTEDVALUE ( dimFlows[flwDescription] ) = "Export", "No. export partners",
+    SELECTEDVALUE ( dimFlows[flwDescription] ) = "Import", "No. import partners",
+    "export and import"
+)
+    MEASURE '_DAX'[Tooltip tittle] = SWITCH (
+    TRUE (),
+    SELECTEDVALUE ( dimFlows[flwDescription] ) = "Export", "#59E2FD",
+    SELECTEDVALUE ( dimFlows[flwDescription] ) = "Import", "#598BBD",
+    "#666666"
+)
+    MEASURE '_DAX'[tooltip tittle3] = SWITCH (
+    TRUE (),
+    SELECTEDVALUE ( dimFlows[flwDescription] ) = "Export", "Total Export",
+    SELECTEDVALUE ( dimFlows[flwDescription] ) = "Import", "Total Import",
+    "Total Export and Import"
+)
+    MEASURE '_DAX'[Total export import Sales YoY %] = VAR CurrentYearSales = [Total import and export]
+VAR PreviousYearSales =
+    CALCULATE ( [Total import and export], SAMEPERIODLASTYEAR ( 'Calendar'[Date] ) )
+RETURN
+    IF (
+        ISBLANK ( PreviousYearSales ),
+        BLANK (),
+        ( CurrentYearSales / PreviousYearSales ) - 1
+    )
+    MEASURE '_DAX'[Total import sales YoY %] = VAR CurrentYearSales = [Total import sales]
+VAR PreviousYearSales =
+    CALCULATE ( [Total import sales], SAMEPERIODLASTYEAR ( 'Calendar'[Date] ) )
+RETURN
+    IF (
+        ISBLANK ( PreviousYearSales ),
+        BLANK (),
+        ( CurrentYearSales / PreviousYearSales ) - 1
+    )
