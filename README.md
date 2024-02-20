@@ -6,10 +6,10 @@ The goal is to demonstrate the ability to **clean, analyze, transform, model, vi
 
 ## Data Sources 📂
 The data in the project can be divided into:
-- **Dimensional Data**, consisting of csv and json files, which will be used to build dimension tables in the Star Schema model in Power BI and visualization in the report.
+- **Dimensional Data**, consisting of [csv and json](https://github.com/SimonAnalyst/Plastic-Windows-Analysis/tree/main/Files) files, which will be used to build dimension tables in the Star Schema model in Power BI and visualization in the report.
 - **Fact Table**, where all important information regarding international trade over the last 24 years is stored. The fact table practically consists only of ID and value columns.
 
-The data was retrieved using APIs of UN Comtrade. Due to limitations to 100k rows, each month had to be downloaded in a separate file, resulting in a total of 248 CSV files.
+The data was retrieved using APIs of UN Comtrade. Due to limitations to 100k rows, each month had to be downloaded in a separate file, resulting in a total of 248 CSV files(1 file per month).
 Detailed API documentation is available at the following [link](https://github.com/uncomtrade/comtradeapicall/blob/main/README.md).
 
 
