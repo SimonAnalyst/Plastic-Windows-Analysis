@@ -1,3 +1,7 @@
+
+
+
+
 # Project Title: Plastic Windows Analysis 📊
 
 The aim of the project is to analyze the global PVC window market in terms of exports and imports over the last 24 years. This will help companies involved in PVC window manufacturing to understand global trade trends and make informed business decisions. The analysis will cover the main trading directions, key market players, export and import values in various regions. As a result, companies will be able to adjust their marketing strategies, production, and distribution to changing market conditions, thus increasing their competitiveness and profitability.
@@ -67,11 +71,16 @@ M code is available in the [file](Code/Power Query M code.txt).
 Based on the imported tables, a classic "Star Schema" data model with one-to-many relationships was created, which will help avoid errors associated with overcomplicating the model and facilitate writing measures in DAX. The entire data model fits into 16 tables.
 Additionally, some tables without relationships and parameter tables were created, which will allow for the execution of some visualizations and measures.
 
+![Data model](https://github.com/SimonAnalyst/Plastic-Windows-Analysis/assets/154997462/deb36b86-9616-427c-85bc-7c365d2f6f35)
+
+
+
+
 ### Data exploratory in DAX
-Using the DAX Query View, I performed data exploration, which allowed me to accurately remove unnecessary columns in Power Query.
+Using the DAX Query View, I performed [data exploration](Code/DAX_fact_table_exploratory.txt), which allowed me to accurately remove unnecessary columns in Power Query.
 
 ### Measures in DAX:
-In the DAX language, 50 measures were written, which were used to create the dashboard. Measures can be divided into 2 types:
+In the DAX language, [50 measures](Code/DAX measures.txt) were written, which were used to create the dashboard. Measures can be divided into 2 types:
 -analytical measures used to convey insights
 -interactive measures used to change titles, change colors, increase dashboard interactivity
 
