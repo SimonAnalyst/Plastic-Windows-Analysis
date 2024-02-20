@@ -91,6 +91,9 @@ The dashboard consists of 3 pages:
 - **Exploration** - allows checking correlations between different computational measures and seeing how selected KPIs have changed over time. Everything in a scatter chart. You can also check each country in detail in terms of various KPIs and in terms of the method of window transport in a matrix.
 - **Trade** - allows checking exports and imports for a specific country and how YoY change. By selecting a specific country, you can check to which continent/region/country and in which year the most or least was exported. The central point of the page is a Decomposition tree visualization.
 
+Dashboard's appearance can be seen [here](https://github.com/SimonAnalyst/Plastic-Windows-Analysis/blob/main/Files/Plastic%20Windows%20Analysis.pdf).
+
+![Zrzut ekranu 2024-02-20 113009](https://github.com/SimonAnalyst/Plastic-Windows-Analysis/assets/154997462/f89bfbc3-70fc-453d-a823-16d4db7c4cf8)
 
 ## Conclusions
 
