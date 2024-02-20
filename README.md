@@ -2,7 +2,7 @@
 
 
 
-# Project Title: Plastic Windows Analysis 📊
+# Project Title: Plastic Windows Analysis 🪟📊
 
 The aim of the project is to analyze the global PVC window market in terms of exports and imports over the last 24 years. This will help companies involved in PVC window manufacturing to understand global trade trends and make informed business decisions. The analysis will cover the main trading directions, key market players, export and import values in various regions. As a result, companies will be able to adjust their marketing strategies, production, and distribution to changing market conditions, thus increasing their competitiveness and profitability.
 
@@ -44,7 +44,7 @@ Query Options
 - includeDesc(bool): Option to include the description or not
 
 
-## Connect and transform the raw data 🛠️📊
+## Connect and transform the raw data 🛠️📈
 
 The following steps apply to:
 
@@ -95,7 +95,7 @@ Dashboard's appearance can be seen [here](https://github.com/SimonAnalyst/Plasti
 
 ![Zrzut ekranu 2024-02-20 113009](https://github.com/SimonAnalyst/Plastic-Windows-Analysis/assets/154997462/f89bfbc3-70fc-453d-a823-16d4db7c4cf8)
 
-## Conclusions
+## Conclusions 📋
 
 Analyzing the PVC window market using a Power BI dashboard can bring many benefits to companies involved in manufacturing these windows. Here are a few conclusions that may be valuable for the user/company:
 
