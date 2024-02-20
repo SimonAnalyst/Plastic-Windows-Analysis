@@ -1,0 +1,240 @@
+﻿Country Code;Country;Region
+AFG;Afghanistan;Asia
+AGO;Angola;Africa
+ALB;Albania;Europe
+AND;Andorra;Europe
+DZA;Algeria;Africa
+ARE;United Arab Emirates;Asia
+ARG;Argentina;South America
+ARM;Armenia;Asia
+ATG;Antigua and Barbuda;North America
+AUS;Australia;Oceania
+AUT;Austria;Europe
+AZE;Azerbaijan;Asia
+BDI;Burundi;Africa
+BEL;Belgium;Europe
+BEN;Benin;Africa
+BFA;Burkina Faso;Africa
+BGD;Bangladesh;Asia
+BHS;The Bahamas;North America
+BHR;Bahrain;Asia
+BGR;Bulgaria;Europe
+BRB;Barbados;North America
+BLR;Belarus;Europe
+BIH;Bosnia and Herzegovina;Europe
+BLZ;Belize;North America
+BOL;Bolivia;South America
+BRA;Brazil;South America
+BTN;Bhutan;Asia
+BRN;Brunei;Asia
+BWA;Botswana;Africa
+CAF;Central African Republic;Africa
+CAN;Canada;North America
+CHE;Switzerland;Europe
+CHL;Chile;South America
+CHN;China;Asia
+CIV;Côte d'Ivoire;Africa
+CMR;Cameroon;Africa
+COD;Dem. Rep. Congo;Africa
+CPV;Cabo Verde;Africa
+COG;Congo;Africa
+KHM;Cambodia;Asia
+COL;Colombia;South America
+COM;Comoros;Africa
+CRI;Costa Rica;North America
+TCD;Chad;Africa
+CUB;Cuba;North America
+CYP;Cyprus;Asia
+CZE;Czech Republic;Europe
+DEU;Germany;Europe
+DJI;Djibouti;Africa
+DMA;Dominica;North America
+DNK;Denmark;Europe
+DOM;Dominican Republic;North America
+HRV;Croatia;Europe
+ECU;Ecuador;South America
+EGY;Egypt;Africa
+ERI;Eritrea;Africa
+ESP;Spain;Europe
+PRK;Dem. People's Rep. Korea;Asia
+EST;Estonia;Europe
+ETH;Ethiopia;Africa
+FIN;Finland;Europe
+FJI;Fiji;Oceania
+FRA;France;Europe
+FSM;Micronesia;Oceania
+SLV;El Salvador;North America
+GAB;Gabon;Africa
+GNQ;Equatorial Guinea;Africa
+GBR;United Kingdom;Europe
+GEO;Georgia;Asia
+GHA;Ghana;Africa
+SWZ;Eswatini;Africa
+GIN;Guinea;Africa
+GMB;The Gambia;Africa
+GNB;Guinea-Bissau;Africa
+GRC;Greece;Europe
+GRD;Grenada;North America
+GTM;Guatemala;North America
+GUY;Guyana;South America
+HND;Honduras;North America
+HTI;Haiti;North America
+HUN;Hungary;Europe
+IDN;Indonesia;Asia
+IND;India;Asia
+IRL;Ireland;Europe
+IRN;Iran;Asia
+IRQ;Iraq;Asia
+ISL;Iceland;Europe
+ISR;Israel;Asia
+ITA;Italy;Europe
+JAM;Jamaica;North America
+JOR;Jordan;Asia
+JPN;Japan;Asia
+KAZ;Kazakhstan;Asia
+KEN;Kenya;Africa
+KGZ;Kyrgyz Republic;Asia
+KIR;Kiribati;Oceania
+KNA;St. Kitts and Nevis;North America
+KOR;Korea;Asia
+KWT;Kuwait;Asia
+LAO;Lao PDR;Asia
+LBN;Lebanon;Asia
+LBR;Liberia;Africa
+LBY;Libya;Africa
+LCA;St. Lucia;North America
+LIE;Liechtenstein;Europe
+LKA;Sri Lanka;Asia
+LVA;Latvia;Europe
+LSO;Lesotho;Africa
+LTU;Lithuania;Europe
+LUX;Luxembourg;Europe
+MAR;Morocco;Africa
+MCO;Monaco;Europe
+MDA;Moldova;Europe
+MDG;Madagascar;Africa
+MWI;Malawi;Africa
+MDV;Maldives;Asia
+MYS;Malaysia;Asia
+MEX;Mexico;North America
+MLI;Mali;Africa
+MHL;Marshall Islands;Oceania
+MLT;Malta;Europe
+MKD;North Macedonia;Europe
+MRT;Mauritania;Africa
+MUS;Mauritius;Africa
+MMR;Myanmar;Asia
+MNE;Montenegro;Europe
+MNG;Mongolia;Asia
+MOZ;Mozambique;Africa
+NAM;Namibia;Africa
+NER;Niger;Africa
+NRU;Nauru;Oceania
+NGA;Nigeria;Africa
+NPL;Nepal;Asia
+NIC;Nicaragua;North America
+NLD;Netherlands;Europe
+NOR;Norway;Europe
+NZL;New Zealand;Oceania
+OMN;Oman;Asia
+PAK;Pakistan;Asia
+PAN;Panama;North America
+PER;Peru;South America
+PHL;Philippines;Asia
+PLW;Palau;Oceania
+PNG;Papua New Guinea;Oceania
+POL;Poland;Europe
+PRT;Portugal;Europe
+PRY;Paraguay;South America
+QAT;Qatar;Asia
+ROU;Romania;Europe
+RUS;Russia;Europe
+RWA;Rwanda;Africa
+SAU;Saudi Arabia;Asia
+SDN;Sudan;Africa
+SEN;Senegal;Africa
+SGP;Singapore;Asia
+SLB;Solomon Islands;Oceania
+SLE;Sierra Leone;Africa
+SMR;San Marino;Europe
+SOM;Somalia;Africa
+SRB;Serbia;Europe
+SSD;South Sudan;Africa
+VCT;St. Vincent and the Grenadines;North America
+WSM;Samoa;Oceania
+STP;São Tomé and Principe;Africa
+SUR;Suriname;South America
+SVK;Slovak Republic;Europe
+SVN;Slovenia;Europe
+SWE;Sweden;Europe
+SYC;Seychelles;Africa
+SYR;Syrian Arab Republic;Asia
+TGO;Togo;Africa
+THA;Thailand;Asia
+TJK;Tajikistan;Asia
+ZAF;South Africa;Africa
+TKM;Turkmenistan;Asia
+TLS;Timor-Leste;Asia
+TON;Tonga;Oceania
+TTO;Trinidad and Tobago;North America
+TUN;Tunisia;Africa
+TUR;Turkey;Asia
+TUV;Tuvalu;Oceania
+TZA;Tanzania;Africa
+UGA;Uganda;Africa
+UKR;Ukraine;Europe
+USA;United States;North America
+URY;Uruguay;South America
+UZB;Uzbekistan;Asia
+VUT;Vanuatu;Oceania
+VEN;Venezuela;South America
+VNM;Vietnam;Asia
+YEM;Yemen;Asia
+ZMB;Zambia;Africa
+ZWE;Zimbabwe;Africa
+WLD;World;
+UMC;Upper middle income;
+SSF;Sub-Saharan Africa;
+SSA;Sub-Saharan Africa (excluding high income);
+TSS;Sub-Saharan Africa (IDA & IBRD);
+SST;Small states;
+SAS;South Asia;
+TSA;South Asia (IDA & IBRD);
+TLA;Latin America & Caribbean (IDA & IBRD);
+LDC;Least developed countries: UN classification;
+LTE;Late-demographic dividend;
+LCN;Latin America & Caribbean;
+LAC;Latin America & Caribbean (excluding high income);
+LMY;Low & middle income;
+LIC;Low income;
+LMC;Lower middle income;
+IBT;IDA & IBRD total;
+IDB;IDA blend;
+IDX;IDA only;
+IDA;IDA total;
+EAR;Early-demographic dividend;
+EAS;East Asia & Pacific;
+EAP;East Asia & Pacific (excluding high income);
+TEA;East Asia & Pacific (IDA & IBRD);
+CSS;Caribbean small states;
+ARB;Arab World;
+CEB;Central Europe and the Baltics;
+EMU;Euro area;
+ECS;Europe & Central Asia;
+ECA;Europe & Central Asia (excluding high income);
+TEC;Europe & Central Asia (IDA & IBRD);
+EUU;European Union;
+FCS;Fragile and conflict affected situations;
+IBD;IBRD only;
+HPC;Heavily indebted poor countries (HIPC);
+HIC;High income;
+MEA;Middle East & North Africa;
+MNA;Middle East & North Africa (excluding high income);
+TMN;Middle East & North Africa (IDA & IBRD);
+MIC;Middle income;
+NAC;North America;
+OED;OECD members;
+OSS;Other small states;
+PSS;Pacific island small states;
+PST;Post-demographic dividend;
+PRE;Pre-demographic dividend;
