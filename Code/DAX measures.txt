@@ -1,16 +1,17 @@
+
 DEFINE
     MEASURE '_DAX'[% total export sales] = CALCULATE (
-        DIVIDE (
-            [Total export sales],
-            CALCULATE ( [Total export sales], ALLSELECTED ( FactTable ) )
-        )
-    ),
-    MEASURE '_DAX'[% total export volume] = CALCULATE (
-        DIVIDE (
-            [Total export volume],
-            CALCULATE ( [Total export volume], ALLSELECTED ( FactTable ) )
-        )
+    DIVIDE (
+        [Total export sales],
+        CALCULATE ( [Total export sales], ALLSELECTED ( FactTable ) )
     )
+)
+    MEASURE '_DAX'[% total export volume] = CALCULATE (
+    DIVIDE (
+        [Total export volume],
+        CALCULATE ( [Total export volume], ALLSELECTED ( FactTable ) )
+    )
+)
 
     MEASURE '_DAX'[% total import sales] = CALCULATE (
     DIVIDE (
