@@ -44,16 +44,16 @@ Query Options
 
 The following steps apply to:
 
-- Data Exploration
-- Data Understanding
-- Data Cleaning
-- Data Preparation
-- Data Modelling
-- Data Transformation
-- Visualization Design
-- Dashboard Development
-- Dynamic Filtering
-- Insights
+- **Data Exploration**
+- **Data Understanding**
+- **Data Cleaning**
+- **Data Preparation**
+- **Data Modelling**
+- **Data Transformation**
+- **Visualization Design**
+- **Dashboard Development**
+- **Dynamic Filtering**
+- **Insights**
 
 ### Retrieving data
 
