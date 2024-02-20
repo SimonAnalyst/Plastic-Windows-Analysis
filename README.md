@@ -2,16 +2,16 @@
 
 The aim of the project is to analyze the global PVC window market in terms of exports and imports over the last 24 years. This will help companies involved in PVC window manufacturing to understand global trade trends and make informed business decisions. The analysis will cover the main trading directions, key market players, export and import values in various regions. As a result, companies will be able to adjust their marketing strategies, production, and distribution to changing market conditions, thus increasing their competitiveness and profitability.
 
-The goal is to demonstrate the ability to clean, analyze, transform, model, visualize, and extract insights driving actionable recommendations using Power BI.
+The goal is to demonstrate the ability to **clean, analyze, transform, model, visualize, and extract insights driving actionable recommendations using Power BI**.
 
 ## Data Sources 📂
 The data in the project can be divided into:
-a) dimensional data, consisting of csv and json files, which will be used to build dimension tables in the Star Schema model in Power BI and visualization in the report.
-b) fact table, where all important information regarding international trade over the last 24 years is stored. The fact table practically consists only of ID and value columns.
+- **Dimensional Data**, consisting of csv and json files, which will be used to build dimension tables in the Star Schema model in Power BI and visualization in the report.
+- **Fact Table**, where all important information regarding international trade over the last 24 years is stored. The fact table practically consists only of ID and value columns.
 
 The data was retrieved using APIs of UN Comtrade. Due to limitations to 100k rows, each month had to be downloaded in a separate file, resulting in a total of 248 CSV files.
-Detailed API documentation is available at the following link:
-https://github.com/uncomtrade/comtradeapicall/blob/main/README.md
+Detailed API documentation is available at the following [link](https://github.com/uncomtrade/comtradeapicall/blob/main/README.md).
+
 
 Below is a detailed description that helped in generating the query.
 
