@@ -61,7 +61,7 @@ After preliminary analysis of the source files in Python, the data was [retrieve
 
 ### Power Query
 In Power Query, data was imported from various sources, cleaned of unnecessary columns (the fact table was reduced from 48 columns to 16), and standardized. Some tables were joined. Additionally, a date table was created in the form of a calendar.
-M code is available in the file.
+M code is available in the [file](Code/Power Query M code.txt).
 
 ### Data modeling in Power BI
 Based on the imported tables, a classic "Star Schema" data model with one-to-many relationships was created, which will help avoid errors associated with overcomplicating the model and facilitate writing measures in DAX. The entire data model fits into 16 tables.
