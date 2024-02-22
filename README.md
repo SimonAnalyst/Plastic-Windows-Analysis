@@ -4,6 +4,11 @@
 
 # Project Title: Plastic Windows Analysis 🪟📊
 
+- **Author:** Szymon Swiezy
+- **Email:** szymon.swiezy1@gmail.com
+- **Website:** https://www.datascienceportfol.io/szymonswiezy
+- **LinkedIn:** www.linkedin.com/in/szymon-świeży
+
 The aim of the project is to analyze the global PVC window market in terms of exports and imports over the last 24 years. This will help companies involved in PVC window manufacturing to understand global trade trends and make informed business decisions. The analysis will cover the main trading directions, key market players, export and import values in various regions. As a result, companies will be able to adjust their marketing strategies, production, and distribution to changing market conditions, thus increasing their competitiveness and profitability.
 
 The goal is to demonstrate the ability to **clean, analyze, transform, model, visualize, and extract insights driving actionable recommendations using Power BI**.
