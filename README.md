@@ -7,6 +7,7 @@
 - **Author:** Szymon Swiezy
 - **Email:** szymon.swiezy1@gmail.com
 - **Website:** www.datascienceportfol.io/szymonswiezy
+- **Dashboard:** www.novypro.com/project/plastic-windows-analysis
 - **LinkedIn:** www.linkedin.com/in/szymon-swiezy
 
 The aim of the project is to analyze the global PVC window market in terms of exports and imports over the last 24 years. This will help companies involved in PVC window manufacturing to understand global trade trends and make informed business decisions. The analysis will cover the main trading directions, key market players, export and import values in various regions. As a result, companies will be able to adjust their marketing strategies, production, and distribution to changing market conditions, thus increasing their competitiveness and profitability.
